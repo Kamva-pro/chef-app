@@ -4,8 +4,8 @@ import { FAB } from "react-native-paper";
 import { StackNavigationProp } from "@react-navigation/stack";
 
 type RootStackParamList = {
-  Home: undefined; // No params for Home screen
-  Menu: undefined; // No params for Menu screen
+  Home: undefined; 
+  Menu: undefined; 
 };
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, "Home">;

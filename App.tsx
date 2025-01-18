@@ -7,8 +7,8 @@ import Home from "./pages/HomePage";
 import Menu from "./pages/Menu";
 
 type RootStackParamList = {
-  Home: undefined; // No parameters for Home screen
-  Menu: undefined; // No parameters for Menu screen
+  Home: undefined; 
+  Menu: undefined; 
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
