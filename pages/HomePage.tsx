@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, Button } from "react-native";
 import { FAB, Card, Title, Paragraph } from "react-native-paper";
 
 interface MenuItem {
@@ -7,7 +7,7 @@ interface MenuItem {
   name: string;
   description: string;
   price: number;
-  course: string; 
+  course: string;
 }
 
 const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
@@ -28,7 +28,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       stats[item.course].totalPrice += item.price;
       return stats;
     },
-    {} as Record<string, { count: number; totalPrice: number }> 
+    {} as Record<string, { count: number; totalPrice: number }>
   );
 
   return (
@@ -70,6 +70,13 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         label="Add"
         onPress={() => navigation.navigate("Menu", { menu_items: menuItems })}
       />
+
+      <View style={styles.filterButtonContainer}>
+        <Button
+          title="Filter Menu by Course"
+          onPress={() => navigation.navigate("FilterMenu", { menuItems })}
+        />
+      </View>
     </View>
   );
 };
@@ -126,9 +133,19 @@ const styles = StyleSheet.create({
   },
   fab: {
     position: "absolute",
-    bottom: 20,
+    bottom: 80,
     right: 20,
     backgroundColor: "#6200ee",
+  },
+  filterButtonContainer: {
+    position: "absolute",
+    bottom: 20,
+    right: 20,
+    left: 20,
+    backgroundColor: "#fff",
+    padding: 10,
+    borderRadius: 8,
+    elevation: 2,
   },
 });
 
