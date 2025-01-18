@@ -1,24 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Provider as PaperProvider } from 'react-native-paper';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { Provider as PaperProvider } from "react-native-paper";
 
-import Home from './pages/HomePage';
-import Menu from './pages/Menu';
+import Home from "./pages/HomePage";
+import Menu from "./pages/Menu";
 
-const Stack = createStackNavigator();
+type RootStackParamList = {
+  Home: undefined; // No parameters for Home screen
+  Menu: undefined; // No parameters for Menu screen
+};
 
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <PaperProvider>
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Menu" component={Menu} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Menu" component={Menu} />
+        </Stack.Navigator>
+      </NavigationContainer>
     </PaperProvider>
-  )
+  );
 }
