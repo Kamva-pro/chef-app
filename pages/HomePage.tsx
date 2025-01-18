@@ -20,10 +20,10 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
           <Card style={styles.card}>
             <Card.Content>
               <View style={styles.cardHeader}>
-                <Title>{item.name}</Title>
+                <Title style={styles.title}>{item.name}</Title>
                 <Text style={styles.price}>R {item.price.toFixed(2)}</Text>
               </View>
-              <Paragraph>{item.description}</Paragraph>
+              <Paragraph style={styles.subTitle}>{item.description}</Paragraph>
             </Card.Content>
           </Card>
         )}
@@ -56,6 +56,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+  title: {
+    color: "#222",
+    fontSize: 20,
+    fontWeight: 700
+  },
+  subTitle: {
+    color: "#444",
+    fontSize: 16,
+    fontWeight: 400,
   },
   price: {
     fontWeight: "bold",

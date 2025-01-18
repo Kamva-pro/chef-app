@@ -12,17 +12,29 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   const menu_items = route.params?.menu_items || [];
 
   const handleSave = () => {
+    if (!name.trim() || !description.trim() || !course || !price.trim()) {
+      alert("Please fill in all the fields before saving.");
+      return;
+    }
+  
+    // Check if the price is a valid number
+    const parsedPrice = parseFloat(price);
+    if (isNaN(parsedPrice) || parsedPrice <= 0) {
+      alert("Please enter a valid positive price.");
+      return; 
+    }
+  
     const newItem = {
       id: `${menu_items.length + 1}`,
       name,
       description,
       course,
-      price: parseFloat(price),
+      price: parsedPrice,
     };
-
-    // Pass updated menu_items back to the Home screen
+  
     navigation.navigate("Home", { menu_items: [...menu_items, newItem] });
   };
+  
 
   return (
     <View style={styles.container}>
