@@ -68,6 +68,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         style={styles.fab}
         icon="plus"
         label="Add"
+        color="#fff"
         onPress={() => navigation.navigate("Menu", { menu_items: menuItems })}
       />
 

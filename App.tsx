@@ -39,7 +39,7 @@ const App = () => {
       >
         <Tab.Screen name="Home" component={Home} />
         <Tab.Screen name="Menu" component={Menu} />
-        <Tab.Screen name="Filter" component={FilterMenu} />
+        <Tab.Screen name="Filter" component={FilterMenu} initialParams={{ menu_items: [] }}  />
       </Tab.Navigator>
     </NavigationContainer>
   );

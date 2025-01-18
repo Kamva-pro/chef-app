@@ -9,48 +9,41 @@ interface MenuItem {
     price: number;
   }
 
-const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
-  const menuItems = route.params?.menuItems || [];
-  const [selectedCourse, setSelectedCourse] = useState<string | null>(null);
-
-  const courses = ["All", "Starter", "Main", "Dessert"];
-
-  const filteredItems =
-    selectedCourse && selectedCourse !== "All"
-      ? menuItems.filter((item: MenuItem) => item.course === selectedCourse)
-      : menuItems;
-
-  const handleSelectCourse = (course: string) => {
-    setSelectedCourse(course);
-  };
-
-  return (
-    <View style={styles.container}>
-      {/* Filter Buttons */}
-      <View style={styles.buttonContainer}>
-        {courses.map((course) => (
-          <TouchableOpacity
-            key={course}
-            style={[
-              styles.button,
-              selectedCourse === course && styles.activeButton,
-            ]}
-            onPress={() => handleSelectCourse(course)}
-          >
-            <Text
+  const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
+    const menuItems: MenuItem[] = route.params?.menu_items || [];
+    const [selectedCourse, setSelectedCourse] = useState<string | null>("All");
+  
+    const filteredItems =
+      selectedCourse && selectedCourse !== "All"
+        ? menuItems.filter((item) => item.course === selectedCourse)
+        : menuItems;
+  
+    const courses = ["All", "Starter", "Main", "Dessert"];
+  
+    return (
+      <View style={styles.container}>
+        <View style={styles.buttonContainer}>
+          {courses.map((course) => (
+            <TouchableOpacity
+              key={course}
               style={[
-                styles.buttonText,
-                selectedCourse === course && styles.activeButtonText,
+                styles.button,
+                selectedCourse === course && styles.activeButton,
               ]}
+              onPress={() => setSelectedCourse(course)}
             >
-              {course}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </View>
-
-      {/* Menu Items List */}
-      {filteredItems.length > 0 ? (
+              <Text
+                style={[
+                  styles.buttonText,
+                  selectedCourse === course && styles.activeButtonText,
+                ]}
+              >
+                {course}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+  
         <FlatList
           data={filteredItems}
           keyExtractor={(item) => item.id}
@@ -62,12 +55,10 @@ const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
             </View>
           )}
         />
-      ) : (
-        <Text style={styles.emptyText}>No items available for this course.</Text>
-      )}
-    </View>
-  );
-};
+      </View>
+    );
+  };
+  
 
 const styles = StyleSheet.create({
   container: {
