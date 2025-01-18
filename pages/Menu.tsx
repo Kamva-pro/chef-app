@@ -33,7 +33,6 @@ const Menu: React.FC = () => {
     setMenuItems([...menuItems, newMenuItem]);
     Alert.alert("Success", "Menu item added successfully!");
 
-    // Clear input fields
     setDishName("");
     setDescription("");
     setSelectedCourse("Appetizer");
@@ -46,6 +45,7 @@ const Menu: React.FC = () => {
 
       <TextInput
         style={styles.input}
+        placeholderTextColor= "#ccc"
         placeholder="Dish Name"
         value={dishName}
         onChangeText={setDishName}
@@ -53,6 +53,8 @@ const Menu: React.FC = () => {
 
       <TextInput
         style={styles.input}
+        placeholderTextColor= "#ccc"
+
         placeholder="Description"
         value={description}
         onChangeText={setDescription}
@@ -61,13 +63,13 @@ const Menu: React.FC = () => {
 
       <Picker
         selectedValue={selectedCourse}
-        onValueChange={(itemValue) => setSelectedCourse(itemValue)}
+        onValueChange={(itemValue: string) => setSelectedCourse(itemValue)}
         style={styles.picker}
       >
-        <Picker.Item label="Appetizer" value="Appetizer" />
+        <Picker.Item label="Starter" value="Starter" />
         <Picker.Item label="Main Course" value="Main Course" />
+        <Picker.Item label="Side Dish" value="Side Dish" />
         <Picker.Item label="Dessert" value="Dessert" />
-        <Picker.Item label="Drink" value="Drink" />
       </Picker>
 
       <TextInput
@@ -76,6 +78,8 @@ const Menu: React.FC = () => {
         keyboardType="numeric"
         value={price}
         onChangeText={setPrice}
+        placeholderTextColor= "#ccc"
+
       />
 
       <View style={styles.buttonContainer}>
