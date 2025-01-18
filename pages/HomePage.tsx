@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { View, StyleSheet, FlatList, Text } from "react-native";
 import { FAB, Card, Title, Paragraph } from "react-native-paper";
 
-// Define interface for MenuItem type
 interface MenuItem {
   id: string;
   name: string;
   description: string;
   price: number;
-  course: string; // Assuming course is a string
+  course: string; 
 }
 
 const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
@@ -20,7 +19,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     }
   }, [route.params?.menu_items]);
 
-  // Define the correct type for courseStats
   const courseStats = menuItems.reduce(
     (stats: Record<string, { count: number; totalPrice: number }>, item: MenuItem) => {
       if (!stats[item.course]) {
@@ -30,12 +28,11 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       stats[item.course].totalPrice += item.price;
       return stats;
     },
-    {} as Record<string, { count: number; totalPrice: number }> // Type assertion here
+    {} as Record<string, { count: number; totalPrice: number }> 
   );
 
   return (
     <View style={styles.container}>
-      {/* Display menu summary */}
       {menuItems.length > 0 ? (
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryTitle}>Menu Summary:</Text>
@@ -51,7 +48,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         </View>
       )}
 
-      {/* Display list of menu items */}
       <FlatList
         data={menuItems}
         keyExtractor={(item) => item.id}
@@ -68,7 +64,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         )}
       />
 
-      {/* Add button */}
       <FAB
         style={styles.fab}
         icon="plus"

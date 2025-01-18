@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { View, StyleSheet, TextInput, Button, Text, FlatList } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
-// Define the MenuItem interface
 interface MenuItem {
   id: string;
   name: string;
@@ -17,17 +16,14 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   const [course, setCourse] = useState("");
   const [price, setPrice] = useState("");
   
-  // Explicitly type the menuItems as an array of MenuItem objects
   const [menuItems, setMenuItems] = useState<MenuItem[]>(route.params?.menu_items || []);
 
-  // Handle adding a new item
   const handleSave = () => {
     if (!name.trim() || !description.trim() || !course || !price.trim()) {
       alert("Please fill in all the fields before saving.");
       return;
     }
 
-    // Check if the price is a valid number
     const parsedPrice = parseFloat(price);
     if (isNaN(parsedPrice) || parsedPrice <= 0) {
       alert("Please enter a valid positive price.");
@@ -44,15 +40,12 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
     const updatedMenuItems = [...menuItems, newItem];
     setMenuItems(updatedMenuItems);
-    // Optionally pass the updated list back to the Home screen
     navigation.navigate("Home", { menu_items: updatedMenuItems });
   };
 
-  // Handle removing an item
   const handleRemoveItem = (id: string) => {
     const updatedMenuItems = menuItems.filter((item) => item.id !== id);
     setMenuItems(updatedMenuItems);
-    // Optionally pass the updated list back to the Home screen
     navigation.navigate("Home", { menu_items: updatedMenuItems });
   };
 
@@ -89,7 +82,6 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       />
       <Button title="Save" color="#000" onPress={handleSave} />
 
-      {/* Display list of menu items */}
       {menuItems.length > 0 && (
         <FlatList
           data={menuItems}
