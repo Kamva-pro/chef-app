@@ -1,40 +1,60 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text, FlatList } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
+// Define the MenuItem interface
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  course: string;
+  price: number;
+}
 
 const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [course, setCourse] = useState("");
   const [price, setPrice] = useState("");
+  
+  // Explicitly type the menuItems as an array of MenuItem objects
+  const [menuItems, setMenuItems] = useState<MenuItem[]>(route.params?.menu_items || []);
 
-  const menu_items = route.params?.menu_items || [];
-
+  // Handle adding a new item
   const handleSave = () => {
     if (!name.trim() || !description.trim() || !course || !price.trim()) {
       alert("Please fill in all the fields before saving.");
       return;
     }
-  
+
     // Check if the price is a valid number
     const parsedPrice = parseFloat(price);
     if (isNaN(parsedPrice) || parsedPrice <= 0) {
       alert("Please enter a valid positive price.");
-      return; 
+      return;
     }
-  
-    const newItem = {
-      id: `${menu_items.length + 1}`,
+
+    const newItem: MenuItem = {
+      id: `${menuItems.length + 1}`,
       name,
       description,
       course,
       price: parsedPrice,
     };
-  
-    navigation.navigate("Home", { menu_items: [...menu_items, newItem] });
+
+    const updatedMenuItems = [...menuItems, newItem];
+    setMenuItems(updatedMenuItems);
+    // Optionally pass the updated list back to the Home screen
+    navigation.navigate("Home", { menu_items: updatedMenuItems });
   };
-  
+
+  // Handle removing an item
+  const handleRemoveItem = (id: string) => {
+    const updatedMenuItems = menuItems.filter((item) => item.id !== id);
+    setMenuItems(updatedMenuItems);
+    // Optionally pass the updated list back to the Home screen
+    navigation.navigate("Home", { menu_items: updatedMenuItems });
+  };
 
   return (
     <View style={styles.container}>
@@ -68,6 +88,26 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         keyboardType="numeric"
       />
       <Button title="Save" color="#000" onPress={handleSave} />
+
+      {/* Display list of menu items */}
+      {menuItems.length > 0 && (
+        <FlatList
+          data={menuItems}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }: { item: MenuItem }) => (
+            <View style={styles.itemContainer}>
+              <Text style={styles.itemText}>{item.name}</Text>
+              <Text style={styles.itemText}>{item.description}</Text>
+              <Text style={styles.itemText}>R {item.price.toFixed(2)}</Text>
+              <Button
+                title="Delete"
+                color="red"
+                onPress={() => handleRemoveItem(item.id)}
+              />
+            </View>
+          )}
+        />
+      )}
     </View>
   );
 };
@@ -83,6 +123,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginBottom: 10,
+  },
+  itemContainer: {
+    marginBottom: 10,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ddd",
+    borderRadius: 8,
+    backgroundColor: "#fff",
+  },
+  itemText: {
+    fontSize: 16,
+    color: "#333",
   },
 });
 
