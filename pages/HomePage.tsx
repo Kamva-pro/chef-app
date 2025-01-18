@@ -71,12 +71,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         onPress={() => navigation.navigate("Menu", { menu_items: menuItems })}
       />
 
-      <View style={styles.filterButtonContainer}>
-        <Button
-          title="Filter Menu by Course"
-          onPress={() => navigation.navigate("FilterMenu", { menuItems })}
-        />
-      </View>
     </View>
   );
 };

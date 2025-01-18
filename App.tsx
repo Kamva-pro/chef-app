@@ -5,6 +5,7 @@ import { Provider as PaperProvider } from "react-native-paper";
 
 import Home from "./pages/HomePage";
 import Menu from "./pages/Menu";
+import FilterMenu from "./pages/FilterMenu";
 
 type RootStackParamList = {
   Home: undefined; 
