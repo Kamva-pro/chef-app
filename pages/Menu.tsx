@@ -38,6 +38,11 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       price: parsedPrice,
     };
 
+    setName("");
+    setDescription("")
+    setCourse("")
+    setPrice("")
+
     const updatedMenuItems = [...menuItems, newItem];
     setMenuItems(updatedMenuItems);
     navigation.navigate("Home", { menu_items: updatedMenuItems });

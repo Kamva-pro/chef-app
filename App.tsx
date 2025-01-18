@@ -15,9 +15,7 @@ const App = () => {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName: string;
-      
-          // Ensure that iconName is always a valid string
-          switch (route.name) {
+                switch (route.name) {
             case "Home":
               iconName = "home-outline";
               break;
@@ -28,7 +26,7 @@ const App = () => {
               iconName = "filter-outline";
               break;
             default:
-              iconName = "help-circle-outline"; // Default icon
+              iconName = "help-circle-outline";
           }
       
           return <Ionicons name={iconName} size={size} color={color} />;
