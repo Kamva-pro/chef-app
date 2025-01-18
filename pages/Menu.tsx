@@ -1,14 +1,20 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 
+const Menu: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <Text>Menu Screen</Text>
+    </View>
+  );
+};
 
-const Menu = () => {
-    return(
-        <View>
-            
-        </View>
-    )
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
-}
-
-export default Menu
+export default Menu;
