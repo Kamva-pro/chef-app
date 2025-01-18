@@ -1,100 +1,61 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert} from "react-native";
-import { Picker } from '@react-native-picker/picker';
+import { View, StyleSheet, TextInput, Button, Text } from "react-native";
+import { Picker } from "@react-native-picker/picker";
 
 
-type MenuItem = {
-  name: string;
-  description: string;
-  course: string;
-  price: number;
-};
-
-const Menu: React.FC = () => {
-  const [dishName, setDishName] = useState("");
+const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) => {
+  const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [selectedCourse, setSelectedCourse] = useState("Appetizer");
+  const [course, setCourse] = useState("");
   const [price, setPrice] = useState("");
-  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+
+  const menu_items = route.params?.menu_items || [];
 
   const handleSave = () => {
-    if (!dishName || !description || !price) {
-      Alert.alert("Error", "Please fill all fields");
-      return;
-    }
-
-    const newMenuItem: MenuItem = {
-      name: dishName,
+    const newItem = {
+      id: `${menu_items.length + 1}`,
+      name,
       description,
-      course: selectedCourse,
+      course,
       price: parseFloat(price),
     };
 
-    setMenuItems([...menuItems, newMenuItem]);
-    Alert.alert("Success", "Menu item added successfully!");
-
-    setDishName("");
-    setDescription("");
-    setSelectedCourse("Appetizer");
-    setPrice("");
+    // Pass updated menu_items back to the Home screen
+    navigation.navigate("Home", { menu_items: [...menu_items, newItem] });
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Add Menu Item</Text>
-
       <TextInput
         style={styles.input}
-        placeholderTextColor= "#ccc"
         placeholder="Dish Name"
-        value={dishName}
-        onChangeText={setDishName}
+        value={name}
+        onChangeText={setName}
       />
-
       <TextInput
         style={styles.input}
-        placeholderTextColor= "#ccc"
-
         placeholder="Description"
         value={description}
         onChangeText={setDescription}
-        multiline
       />
-
       <Picker
-        selectedValue={selectedCourse}
-        onValueChange={(itemValue: string) => setSelectedCourse(itemValue)}
-        style={styles.picker}
+        selectedValue={course}
+        style={styles.input}
+        onValueChange={(itemValue) => setCourse(itemValue)}
       >
+        <Picker.Item label="Select Course" value="" />
         <Picker.Item label="Starter" value="Starter" />
-        <Picker.Item label="Main Course" value="Main Course" />
-        <Picker.Item label="Side Dish" value="Side Dish" />
+        <Picker.Item label="Main" value="Main" />
         <Picker.Item label="Dessert" value="Dessert" />
       </Picker>
-
       <TextInput
         style={styles.input}
         placeholder="Price"
-        keyboardType="numeric"
         value={price}
         onChangeText={setPrice}
-        placeholderTextColor= "#ccc"
-
+        keyboardType="numeric"
       />
-
-      <View style={styles.buttonContainer}>
-        <Button title="Save" color="#000" onPress={handleSave} />
-      </View>
-
-      <Text style={styles.subtitle}>Menu Items:</Text>
-      {menuItems.map((item, index) => (
-        <View key={index} style={styles.menuItem}>
-          <Text>{item.name}</Text>
-          <Text>{item.description}</Text>
-          <Text>{item.course}</Text>
-          <Text>${item.price.toFixed(2)}</Text>
-        </View>
-      ))}
+      <Button title="Save" color="#000" onPress={handleSave} />
     </View>
   );
 };
@@ -102,43 +63,13 @@ const Menu: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: "#fff",
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
+    padding: 16,
   },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 8,
     padding: 10,
-    marginBottom: 15,
-    fontSize: 16,
-  },
-  picker: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    marginBottom: 15,
-  },
-  buttonContainer: {
-    marginTop: 10,
-    marginBottom: 20,
-  },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginBottom: 10,
-  },
-  menuItem: {
-    padding: 10,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
     marginBottom: 10,
   },
 });
