@@ -1,28 +1,50 @@
-import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Provider as PaperProvider } from "react-native-paper";
-
 import Home from "./pages/HomePage";
 import Menu from "./pages/Menu";
 import FilterMenu from "./pages/FilterMenu";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from "@react-navigation/native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-type RootStackParamList = {
-  Home: undefined; 
-  Menu: undefined; 
+const Tab = createBottomTabNavigator();
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName: string;
+      
+          // Ensure that iconName is always a valid string
+          switch (route.name) {
+            case "Home":
+              iconName = "home-outline";
+              break;
+            case "Menu":
+              iconName = "restaurant-outline";
+              break;
+            case "Filter":
+              iconName = "filter-outline";
+              break;
+            default:
+              iconName = "help-circle-outline"; // Default icon
+          }
+      
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "#6200ee",
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
+      })}
+      
+      >
+        <Tab.Screen name="Home" component={Home} />
+        <Tab.Screen name="Menu" component={Menu} />
+        <Tab.Screen name="Filter" component={FilterMenu} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
-
-export default function App() {
-  return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="Menu" component={Menu} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
-  );
-}
+export default App;
