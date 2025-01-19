@@ -1,64 +1,69 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
 
 interface MenuItem {
-    id: string;
-    name: string;
-    description: string;
-    course: string;
-    price: number;
-  }
+  id: string;
+  name: string;
+  description: string;
+  course: string;
+  price: number;
+}
 
-  const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
-    const menuItems: MenuItem[] = route.params?.menu_items || [];
-    const [selectedCourse, setSelectedCourse] = useState<string | null>("All");
-  
-    const filteredItems =
-      selectedCourse && selectedCourse !== "All"
-        ? menuItems.filter((item) => item.course === selectedCourse)
-        : menuItems;
-  
-    const courses = ["All", "Starter", "Main", "Dessert"];
-  
-    return (
-      <View style={styles.container}>
-        <View style={styles.buttonContainer}>
-          {courses.map((course) => (
-            <TouchableOpacity
-              key={course}
+const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<string | null>("All");
+
+  useEffect(() => {
+    if (route.params?.menu_items) {
+      setMenuItems(route.params.menu_items);
+    }
+  }, [route.params?.menu_items]);
+
+  const filteredItems =
+    selectedCourse && selectedCourse !== "All"
+      ? menuItems.filter((item) => item.course === selectedCourse)
+      : menuItems;
+
+  const courses = ["All", "Starter", "Main", "Dessert"];
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.buttonContainer}>
+        {courses.map((course) => (
+          <TouchableOpacity
+            key={course}
+            style={[
+              styles.button,
+              selectedCourse === course && styles.activeButton,
+            ]}
+            onPress={() => setSelectedCourse(course)}
+          >
+            <Text
               style={[
-                styles.button,
-                selectedCourse === course && styles.activeButton,
+                styles.buttonText,
+                selectedCourse === course && styles.activeButtonText,
               ]}
-              onPress={() => setSelectedCourse(course)}
             >
-              <Text
-                style={[
-                  styles.buttonText,
-                  selectedCourse === course && styles.activeButtonText,
-                ]}
-              >
-                {course}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-  
-        <FlatList
-          data={filteredItems}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.itemContainer}>
-              <Text style={styles.itemText}>{item.name}</Text>
-              <Text style={styles.itemText}>{item.description}</Text>
-              <Text style={styles.itemText}>R {item.price.toFixed(2)}</Text>
-            </View>
-          )}
-        />
+              {course}
+            </Text>
+          </TouchableOpacity>
+        ))}
       </View>
-    );
-  };
-  
+
+      <FlatList
+        data={filteredItems}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <Text style={styles.itemText}>{item.name}</Text>
+            <Text style={styles.itemText}>{item.description}</Text>
+            <Text style={styles.itemText}>R {item.price.toFixed(2)}</Text>
+          </View>
+        )}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -99,12 +104,6 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     color: "#333",
-  },
-  emptyText: {
-    fontSize: 16,
-    color: "#999",
-    textAlign: "center",
-    marginTop: 20,
   },
 });
 
