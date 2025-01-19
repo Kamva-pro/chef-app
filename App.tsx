@@ -1,7 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MenuProvider } from "./MenuContext";  
 import Home from "./pages/HomePage";
 import Menu from "./pages/Menu";
 import FilterMenu from "./pages/FilterMenu";
@@ -11,7 +10,6 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
   return (
-    <MenuProvider>
       <NavigationContainer>
         <Tab.Navigator
           screenOptions={({ route }) => ({
@@ -42,7 +40,6 @@ const App = () => {
           <Tab.Screen name="Filter" component={FilterMenu} />
         </Tab.Navigator>
       </NavigationContainer>
-    </MenuProvider>
   );
 };
 
