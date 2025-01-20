@@ -53,6 +53,8 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   const handleRemoveItem = (id: string) => {
     const updatedMenuItems = menuItems.filter((item) => item.id !== id);
     setMenuItems(updatedMenuItems);
+    navigation.navigate("Filter", { menu_items: updatedMenuItems });
+
     navigation.navigate("Home", { menu_items: updatedMenuItems });
   };
 
