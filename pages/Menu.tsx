@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, TextInput, Button, Text, FlatList } from "react-native";
+import { View, StyleSheet, TextInput, Button, Text, FlatList, TouchableOpacity } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 
 interface MenuItem {
@@ -89,7 +89,11 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         onChangeText={setPrice}
         keyboardType="numeric"
       />
-      <Button title="Save" color="#000" onPress={handleSave} />
+
+      <TouchableOpacity onPress={handleSave} style={styles.save}>
+        <Text style={styles.savetext}>SAVE</Text>
+      </TouchableOpacity>
+      {/* <Button  title="Save" color="#000" onPress={handleSave} /> */}
 
       {menuItems.length > 0 && (
         <FlatList
@@ -117,12 +121,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    marginLeft: 24,
+    marginRight: 24,
     justifyContent: "center"
   },
   input: {
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 8,
+    borderRadius: 24,
     padding: 10,
     marginBottom: 10,
   },
@@ -131,13 +137,24 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 1,
     borderColor: "#ddd",
-    borderRadius: 8,
+    borderRadius: 24,
     backgroundColor: "#fff",
   },
   itemText: {
     fontSize: 16,
     color: "#333",
   },
+  save: {
+    borderRadius: 24,
+    backgroundColor: "#000",
+    padding: 12,
+ 
+  },
+  savetext: {
+    color: "#fff",
+    textAlign: "center",
+    fontWeight: "700"
+  }
 });
 
 export default Menu;

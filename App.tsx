@@ -30,10 +30,10 @@ const App = () => {
             }
             return <Ionicons name={iconName} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#000",
+          tabBarActiveTintColor: "#007BFF",
           tabBarInactiveTintColor: "gray",
           headerStyle: {
-            backgroundColor: "#000", 
+            backgroundColor: "#4682B4", 
           },
           headerTintColor: "#fff", 
           headerTitleStyle: {

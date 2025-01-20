@@ -85,6 +85,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 <FAB
         style={styles.fab}
         icon="plus"
+        
         // label="Add"
         onPress={() => navigation.navigate("Menu")}
       />
@@ -155,13 +156,13 @@ const styles = StyleSheet.create({
   price: {
     fontWeight: "bold",
     fontSize: 16,
-    color: "#6200ee",
+    color: "#4682B4",
   },
   fab: {
     position: "absolute",
     bottom: 20,
     right: 20,
-    backgroundColor: "#6200ee",
+    backgroundColor: "#1E90FF",
   },
 });
 
