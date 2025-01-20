@@ -83,16 +83,18 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       />
 
       <FloatingAction
-        actions={actions}
+        // actions={actions}
         color="#6200ee"
-        onPressItem={(name?: string) => {
-          if (name) {
-            const action = actions.find((action) => action.name === name);
-            if (action) {
-              action.onPress();
-            }
-          }
-        }}
+        onPressMain={() => navigation.navigate("Menu", { menu_items: menuItems },
+        // onPressItem={(name?: string) => {
+        //   if (name) {
+        //     const action = actions.find((action) => action.name === name);
+        //     if (action) {
+        //       action.onPress();
+        //     }
+        //   }
+        // }}
+        )}
       />
     </View>
   );
