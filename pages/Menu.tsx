@@ -91,19 +91,17 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       />
 
       <TouchableOpacity onPress={handleSave} style={styles.save}>
-        <Text style={styles.savetext}>SAVE</Text>
+        <Text style={styles.savetext}>SAVE ITEM</Text>
       </TouchableOpacity>
-      {/* <Button  title="Save" color="#000" onPress={handleSave} /> */}
 
       {menuItems.length > 0 && (
         <FlatList
           data={menuItems}
           keyExtractor={(item) => item.id}
           renderItem={({ item }: { item: MenuItem }) => (
-            <View style={styles.itemContainer}>
-              <Text style={styles.itemText}>{item.name}</Text>
-              <Text style={styles.itemText}>{item.description}</Text>
-              <Text style={styles.itemText}>R {item.price.toFixed(2)}</Text>
+            <View style={styles.card}>
+              <Text style={styles.title}>{item.name}</Text>
+              <Text style={styles.subTitle}>{item.description}</Text>
               <Button
                 title="Delete"
                 color="red"
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
   },
   save: {
     borderRadius: 24,
-    backgroundColor: "#000",
+    backgroundColor: "#007BFF",
     padding: 12,
  
   },
@@ -154,7 +152,34 @@ const styles = StyleSheet.create({
     color: "#fff",
     textAlign: "center",
     fontWeight: "700"
-  }
+  },
+  card: {
+    marginVertical: 8,
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    elevation: 2,
+  },
+  price: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#4682B4",
+  },
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  title: {
+    color: "#222",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  subTitle: {
+    color: "#444",
+    fontSize: 16,
+    fontWeight: "400",
+  },
 });
 
 export default Menu;

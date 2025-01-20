@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   activeButton: {
-    backgroundColor: "#000",
+    backgroundColor: "#5BC0DE",
   },
   buttonText: {
     color: "#333",
