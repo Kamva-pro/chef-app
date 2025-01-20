@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Text, Button } from "react-native";
-import { FAB, Card, Title, Paragraph } from "react-native-paper";
+import { View, StyleSheet, FlatList, Text } from "react-native";
+import { FloatingAction } from "react-native-floating-action";
+import { Card, Title, Paragraph } from "react-native-paper";
 
 interface MenuItem {
   id: string;
@@ -30,6 +31,23 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     },
     {} as Record<string, { count: number; totalPrice: number }>
   );
+
+  const actions = [
+    {
+      text: "Go to Menu",
+      // icon: require("./assets/menu-icon.png"), // Replace with your own icon
+      name: "menu",
+      position: 1,
+      onPress: () => navigation.navigate("Menu", { menu_items: menuItems }),
+    },
+    {
+      text: "Go to Filter Menu",
+      // icon: require("./assets/filter-icon.png"), // Replace with your own icon
+      name: "filterMenu",
+      position: 2,
+      onPress: () => navigation.navigate("Filter", { menu_items: menuItems }),
+    },
+  ];
 
   return (
     <View style={styles.container}>
@@ -64,14 +82,19 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         )}
       />
 
-      <FAB
-        style={styles.fab}
-        icon="plus"
-        label="Add"
-        color="#fff"
-        onPress={() => navigation.navigate("Menu", { menu_items: menuItems })}
+      <FloatingAction
+        actions={actions}
+        color="#6200ee"
+        onPressItem={(name?: string) => {
+          if (name) {
+            // Find the action based on name and trigger navigation
+            const action = actions.find((action) => action.name === name);
+            if (action) {
+              action.onPress();
+            }
+          }
+        }}
       />
-
     </View>
   );
 };
@@ -125,22 +148,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     color: "#6200ee",
-  },
-  fab: {
-    position: "absolute",
-    bottom: 80,
-    right: 20,
-    backgroundColor: "#6200ee",
-  },
-  filterButtonContainer: {
-    position: "absolute",
-    bottom: 20,
-    right: 20,
-    left: 20,
-    backgroundColor: "#fff",
-    padding: 10,
-    borderRadius: 8,
-    elevation: 2,
   },
 });
 
