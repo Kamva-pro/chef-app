@@ -35,14 +35,14 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
   const actions = [
     {
       text: "Go to Menu",
-      // icon: require("./assets/menu-icon.png"), // Replace with your own icon
+      // icon: require("./assets/menu-icon.png"),
       name: "menu",
       position: 1,
       onPress: () => navigation.navigate("Menu", { menu_items: menuItems }),
     },
     {
       text: "Go to Filter Menu",
-      // icon: require("./assets/filter-icon.png"), // Replace with your own icon
+      // icon: require("./assets/filter-icon.png"), 
       name: "filterMenu",
       position: 2,
       onPress: () => navigation.navigate("Filter", { menu_items: menuItems }),
@@ -87,7 +87,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         color="#6200ee"
         onPressItem={(name?: string) => {
           if (name) {
-            // Find the action based on name and trigger navigation
             const action = actions.find((action) => action.name === name);
             if (action) {
               action.onPress();

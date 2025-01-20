@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
+import { Card, Title, Paragraph } from "react-native-paper";
+
 
 interface MenuItem {
   id: string;
@@ -54,11 +56,15 @@ const FilterMenu: React.FC<{ route: any }> = ({ route }) => {
         data={filteredItems}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.itemText}>{item.name}</Text>
-            <Text style={styles.itemText}>{item.description}</Text>
-            <Text style={styles.itemText}>R {item.price.toFixed(2)}</Text>
-          </View>
+          <Card style={styles.card}>
+            <Card.Content>
+              <View style={styles.cardHeader}>
+                <Title style={styles.title}>{item.name}</Title>
+                <Text style={styles.price}>R {item.price.toFixed(2)}</Text>
+              </View>
+              <Paragraph style={styles.subTitle}>{item.description}</Paragraph>
+            </Card.Content>
+          </Card>
         )}
       />
     </View>
@@ -104,6 +110,33 @@ const styles = StyleSheet.create({
   itemText: {
     fontSize: 16,
     color: "#333",
+  },
+  card: {
+    marginVertical: 8,
+    padding: 10,
+    borderRadius: 8,
+    backgroundColor: "#fff",
+    elevation: 2,
+  },
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  title: {
+    color: "#222",
+    fontSize: 20,
+    fontWeight: "700",
+  },
+  subTitle: {
+    color: "#444",
+    fontSize: 16,
+    fontWeight: "400",
+  },
+  price: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#6200ee",
   },
 });
 
