@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, StyleSheet, FlatList, Text } from "react-native";
-import { FloatingAction } from "react-native-floating-action";
 import { Card, Title, Paragraph, FAB } from "react-native-paper";
 
 interface MenuItem {
@@ -31,23 +30,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
     },
     {} as Record<string, { count: number; totalPrice: number }>
   );
-
-  // const actions = [
-  //   {
-  //     text: "Go to Menu",
-  //     // icon: require("./assets/menu-icon.png"),
-  //     name: "menu",
-  //     position: 1,
-  //     onPress: () => navigation.navigate("Menu", { menu_items: menuItems }),
-  //   },
-  //   {
-  //     text: "Go to Filter Menu",
-  //     // icon: require("./assets/filter-icon.png"), 
-  //     name: "filterMenu",
-  //     position: 2,
-  //     onPress: () => navigation.navigate("Filter", { menu_items: menuItems }),
-  //   },
-  // ];
 
   return (
     <View style={styles.container}>
@@ -82,28 +64,12 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         )}
       />
 
-<FAB
+      <FAB
         style={styles.fab}
         icon="plus"
-        
-        // label="Add"
         onPress={() => navigation.navigate("Menu")}
-      />
-            
-      {/* <FloatingAction
-        // actions={actions}
-        color="#6200ee"
-        onPressMain={() => navigation.navigate("Menu", { menu_items: menuItems },
-        // onPressItem={(name?: string) => {
-        //   if (name) {
-        //     const action = actions.find((action) => action.name === name);
-        //     if (action) {
-        //       action.onPress();
-        //     }
-        //   }
-        // }}
-        )}
-      /> */}
+        />
+    
     </View>
   );
 };

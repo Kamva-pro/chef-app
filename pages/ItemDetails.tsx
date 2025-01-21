@@ -11,7 +11,7 @@ const MenuItemDetails: React.FC<{ route: any; navigation: any }> = ({ route }) =
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: item.image || "https://via.placeholder.com/150" }}
+        source={{ uri: item.image }}
         style={styles.image}
       />
       <Text style={styles.title}>{item.name}</Text>
