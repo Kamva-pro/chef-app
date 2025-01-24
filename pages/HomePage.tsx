@@ -37,7 +37,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       {menuItems.length > 0 ? (
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryTitle}>Menu Summary:</Text>
-          <Text style={styles.summaryText}>Total of {menuItems.length} dishes to choose from</Text>
+          <Text style={styles.summaryText}>Total of {menuItems.length} menu items to choose from</Text>
           {Object.entries(courseStats).map(([course, { count, totalPrice }]) => (
             
             <Text key={String(course)} style={styles.summaryText}>
@@ -71,8 +71,8 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
       <FAB
         style={styles.fab}
+
         icon="plus"
-        color="#fff"
         onPress={() => navigation.navigate("Menu")}
         />
     
