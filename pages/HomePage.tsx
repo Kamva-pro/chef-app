@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, StyleSheet, FlatList, Text } from "react-native";
+import { View, StyleSheet, FlatList, Text, Image } from "react-native";
 import { Card, Title, Paragraph, FAB } from "react-native-paper";
 
 interface MenuItem {
@@ -54,7 +54,10 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
         renderItem={({ item }) => (
           <Card style={styles.card}>
             <Card.Content>
+
               <View style={styles.cardHeader}>
+              <Image style={styles.img} srcSet="../assets/img-1.jpg" src="../assets/img-1.jpg"/>
+
                 <Title style={styles.title}>{item.name}</Title>
                 <Text style={styles.price}>R {item.price.toFixed(2)}</Text>
               </View>
@@ -130,6 +133,12 @@ const styles = StyleSheet.create({
     right: 20,
     backgroundColor: "#1E90FF",
   },
+
+  img: {
+    width: 50,
+    height: 50,
+
+  }
 });
 
 export default Home;
