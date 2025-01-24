@@ -56,7 +56,6 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
             <Card.Content>
 
               <View style={styles.cardHeader}>
-              <Image style={styles.img} srcSet="../assets/img-1.jpg" src="../assets/img-1.jpg"/>
 
                 <Title style={styles.title}>{item.name}</Title>
                 <Text style={styles.price}>R {item.price.toFixed(2)}</Text>

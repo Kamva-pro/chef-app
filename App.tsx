@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./pages/HomePage";
 import Menu from "./pages/Menu";
 import FilterMenu from "./pages/FilterMenu";
-import MenuItemDetails from "./pages/ItemDetails";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 const Tab = createBottomTabNavigator();
@@ -58,10 +57,7 @@ const App = () => {
           options={{ headerTitle: "Filter Menu" }} 
         />
       </Tab.Navigator>
-      <Tab.Screen
-        name="Details"
-        component={MenuItemDetails}
-       />
+  
     </NavigationContainer>
   );
 };
