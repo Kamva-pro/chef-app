@@ -54,7 +54,7 @@ const App = () => {
         <Tab.Screen 
           name="Filter" 
           component={FilterMenu} 
-          options={{ headerTitle: "Filter Menu" }} 
+          options={{ headerTitle: "Filter" }} 
         />
       </Tab.Navigator>
   

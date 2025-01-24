@@ -45,6 +45,8 @@ const Menu: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
 
     const updatedMenuItems = [...menuItems, newItem];
     setMenuItems(updatedMenuItems);
+
+    // sends data to the filter screen first before navigating to homepage
     navigation.navigate("Filter", { menu_items: updatedMenuItems });
 
     navigation.navigate("Home", { menu_items: updatedMenuItems });

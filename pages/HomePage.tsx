@@ -26,6 +26,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       }
       stats[item.course].count += 1;
       stats[item.course].totalPrice += item.price;
+      
       return stats;
     },
     {} as Record<string, { count: number; totalPrice: number }>
@@ -36,7 +37,9 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       {menuItems.length > 0 ? (
         <View style={styles.summaryContainer}>
           <Text style={styles.summaryTitle}>Menu Summary:</Text>
+          <Text style={styles.summaryText}>Total of {menuItems.length} dishes to choose from</Text>
           {Object.entries(courseStats).map(([course, { count, totalPrice }]) => (
+            
             <Text key={String(course)} style={styles.summaryText}>
               {String(course)}: {count} dishes | Avg Price: R {(totalPrice / count).toFixed(2)}
             </Text>
@@ -69,6 +72,7 @@ const Home: React.FC<{ route: any; navigation: any }> = ({ route, navigation }) 
       <FAB
         style={styles.fab}
         icon="plus"
+        color="#fff"
         onPress={() => navigation.navigate("Menu")}
         />
     
